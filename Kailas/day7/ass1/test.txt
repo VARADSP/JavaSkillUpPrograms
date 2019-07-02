@@ -1,0 +1,7 @@
+abc 
+kailas
+Int
+Float
+Double
+Long
+Character
