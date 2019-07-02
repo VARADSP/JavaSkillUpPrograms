@@ -199,20 +199,34 @@ public class Finder extends Thread {
 	
 	
 	private void search(String filter) {
-	    Set<User> sortedSet = new HashSet<User>(Loader.users);
-	       
+	    Set<User> sortedSet = new HashSet<User>();   
+	    
+	    
+	    for(User u : Loader.users) {
+	        String user = u.toString();
+	        if(user.contains(filter.trim())) {
+	            sortedSet.add(u);
+	        }
+	    }
+//	    System.out.println("Prepared Set : ");
+//	    System.out.println(sortedSet);
+	    System.out.println("Enter name/address/city/telephone/salary to search and filter the results");
+	    String filterValue = scanner.next();
+
+	    System.out.println("Search Results : ");
 	    Iterator<User> it = sortedSet.iterator();
-	    System.out.println("");
-	    while(it.hasNext()) {
-	      User value = it.next();
-	      System.out.println(value);
-	      String searchIn = value.toString();
-	      if(searchIn.contains("pankaj")) {
-	       System.out.println("Found Pankaj Employee");   
-	      }
-	     }
-	    
-	    
+	    boolean isFound = false;
+        while(it.hasNext()) {
+          User value = it.next();
+          String searchIn = value.toString();
+          if(searchIn.contains(filterValue.trim())) {
+              System.out.println(searchIn);
+              isFound = true;
+          }
+         }
+        if(isFound==false) {
+            System.out.println("No search results found for given parameter!");
+        }
 	}
 	
 	private void getList(String filter) {
